@@ -1,3 +1,18 @@
 // Place all the styles related to the Payment controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+input{
+  display: block;
+  margin-bottom: 10px;
+  &[type=submit] {
+    width: 100px;
+    height: 50px;
+    background: #000;
+    color: #fff;
+    font-size: 20px;
+  }
+}
+label {
+  display: block;
+  margin-top: 10px;
+}

@@ -1,6 +1,8 @@
 <h1>Payment</h1>
 <form id="checkout-form" action='/checkout' method="post">
   <div id="error-message"></div>
+  <label for="payment-amount">Amount</label>
+  <input id="payment-amount" name="payment-amount" type="number">
 
   <label for="cc-number">Card Number</label>
   <input id="cc-number" name="cc-number" type="text">
@@ -12,6 +14,6 @@
   <input id="expiration-date" name="expiration-date" type="text">
 
   <input type="hidden" name="payment_method_nonce">
-  <input type="submit" value="Pay $10">
+  <input type="submit" value="Pay">
 </form>
 
