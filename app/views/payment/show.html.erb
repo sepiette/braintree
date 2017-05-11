@@ -1,0 +1,17 @@
+<h1>Payment</h1>
+<form id="checkout-form" action='/payment' method="post">
+  <div id="error-message"></div>
+
+  <label for="cc-number">Card Number</label>
+  <input id="cc-number" name="cc-number" type="text">
+
+  <label for="cvv">CVV</label>
+  <input id="cvv" name="cvv" type="text">
+
+  <label for="expiration-date">Expiration Date</label>
+  <input id="expiration-date" name="expiration-date" type="text">
+
+  <input type="hidden" name="payment_method_nonce">
+  <input type="submit" value="Pay $10">
+</form>
+
