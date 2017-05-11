@@ -7,10 +7,9 @@ var requestClientToken = function () {
   })
 }
 
-var createClientGateway = function() {
-  
+var createClientGateway = function(e) {
+  e.preventDefault();
   requestClientToken().done(function(response) {
-    
     braintree.client.create({
       authorization: response.token
     }, function(clientErr, clientInstance) {

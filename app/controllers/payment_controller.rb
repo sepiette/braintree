@@ -20,7 +20,6 @@ class PaymentController < ApplicationController
     else
       @errors = result.errors
       render :json => {'errors': @errors}
-      format.html { render :action => "show" }
     end
 
     
