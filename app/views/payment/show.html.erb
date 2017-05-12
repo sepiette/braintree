@@ -1,5 +1,8 @@
 <h1>Payment</h1>
  <form id="checkout-form" action="/checkout" method="post">
+    <label for="payment-amount">Amount to Pay</label>
+    <input id="payment-amount" class="hosted-field" type="number" required>
+
     <label for="cc-number">Card Number</label>
     <div id="cc-number" class="hosted-field"></div>
 
@@ -10,5 +13,5 @@
     <div id="expiration-date" class="hosted-field"></div>
 
     <input type="hidden" name="payment_method_nonce">
-    <input id="submit" type="submit" value="Pay">
+    <input id="submit" class="button" type="submit" value="Pay">
  </form>

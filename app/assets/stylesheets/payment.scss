@@ -1,18 +1,50 @@
 // Place all the styles related to the Payment controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-input{
-  display: block;
-  margin-bottom: 10px;
-  &[type=submit] {
-    width: 100px;
-    height: 50px;
-    background: #000;
-    color: #fff;
-    font-size: 20px;
-  }
+
+.hosted-field {
+  height: 50px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  display: inline-block;
+  box-shadow: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+  line-height: 20px;
+  background: #fcfcfc;
+  margin-bottom: 12px;
+  background: linear-gradient(to right, white 50%, #fcfcfc 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 300ms ease-in-out;
 }
+
+.button {
+  cursor: pointer;
+  font-weight: 500;
+  line-height: inherit;
+  height: 50px;
+  width: 100px;
+  font-size: 20px;
+  background-color: #64d18a;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+}
+
 label {
+  font-family: courier, monospace;
+  text-transform: uppercase;
+  font-size: 14px;
   display: block;
-  margin-top: 10px;
+  margin-bottom: 6px;
 }
