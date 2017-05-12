@@ -1,19 +1,14 @@
 <h1>Payment</h1>
-<form id="checkout-form" action='/checkout' method="post">
-  <div id="error-message"></div>
-  <label for="payment-amount">Amount</label>
-  <input id="payment-amount" name="payment-amount" type="number">
+ <form id="checkout-form" action="/checkout" method="post">
+    <label for="cc-number">Card Number</label>
+    <div id="cc-number" class="hosted-field"></div>
 
-  <label for="cc-number">Card Number</label>
-  <input id="cc-number" name="cc-number" type="text">
+    <label for="cvv">CVV</label>
+    <div id="cvv" name="cvv" class="hosted-field"></div>
 
-  <label for="cvv">CVV</label>
-  <input id="cvv" name="cvv" type="text">
+    <label for="expiration-date">Expiration Date</label>
+    <div id="expiration-date" class="hosted-field"></div>
 
-  <label for="expiration-date">Expiration Date</label>
-  <input id="expiration-date" name="expiration-date" type="text">
-
-  <input type="hidden" name="payment_method_nonce">
-  <input type="submit" value="Pay">
-</form>
-
+    <input type="hidden" name="payment_method_nonce">
+    <input id="submit" type="submit" value="Pay">
+ </form>

@@ -1,14 +1,12 @@
-braintree = require('braintree-web');
+var braintree = require('braintree-web');
 
 var requestClientToken = function () {
   return $.ajax({
     url: '/client_token',
     method: 'GET'
-  })
+  });
 }
-
-var createClientGateway = function(e) {
-  e.preventDefault();
+var createClientInstance = function() {
   requestClientToken().done(function(response) {
     braintree.client.create({
       authorization: response.token
@@ -16,34 +14,56 @@ var createClientGateway = function(e) {
         if(clientErr){ throw new Error(clientErr); }
 
         console.log(clientInstance);
-        makePaymentRequest(clientInstance);
-
+        createHostedFields(clientInstance);
       });
   });
 }
 
-var makePaymentRequest = function(clientInstance) {
-  var data = {
-    creditCard: {
-      number: $('#cc-number')[0].value,
-      cvv: $('#cvv')[0].value,
-      expirationDate: $('#expiration-date')[0].value,
-      options: {
-        validate: false
+var processPayment = function(hostedFieldInstance) {
+  // console.log(hostedFieldInstance.getState());
+  hostedFieldInstance.tokenize(function (err, payload) {
+    if(err){
+      console.err(err);
+      return;
+    }
+    console.log(payload);
+    completeTransaction(payload.nonce);
+
+  });  
+}
+
+var createHostedFields = function(clientInstance) {
+  braintree.hostedFields.create({
+    client: clientInstance,
+    fields: {
+      number: {
+        selector: '#cc-number',
+        placeholder: '1111 1111 1111 1111'
+      },
+      cvv: {
+        selector: '#cvv',
+        placeholder: '123'
+      },
+      expirationDate: {
+        selector: '#expiration-date',
+        placeholder: 'MM/YYYY'
       }
     }
-  };
-  clientInstance.request({
-      endpoint: 'payment_methods/credit_cards',
-      method: 'post',
-      data: data
-    }, function (requestErr, response) {
-        if (requestErr) { throw new Error(requestErr); }
+  }, function(err, hostedFieldInstance) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log(hostedFieldInstance);
+      hostedFieldInstance;
+      $('input[type="submit"]').click(function(e) {
+        e.preventDefault();
+        processPayment(hostedFieldInstance);
+      })
 
-        console.log('Got nonce:', response.creditCards[0].nonce);
-        completeTransaction(response.creditCards[0].nonce);
-  }); 
+  });
 }
+
 var completeTransaction = function(nonce) {
    $.ajax({
       url: '/checkout',
@@ -58,10 +78,10 @@ var completeTransaction = function(nonce) {
     $('body').append('<h2> Thank you. '+response.transaction_status+' </h2>');
    })
    .fail(function(err) {
-    console.log(err);
+    console.error(err);
    });
 }
 
 $(document).ready(function(){
-  $('#checkout-form').on('submit', createClientGateway);
+  createClientInstance();
 });
